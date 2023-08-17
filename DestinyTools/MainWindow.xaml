@@ -39,11 +39,12 @@
                     <TextBlock Text="Buffs"/>
                     <Border BorderThickness="1" BorderBrush="Black"/>
 
-                    <DataGrid AutoGenerateColumns="False">
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding buffs}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name"/>
-                            <DataGridTextColumn Header="Percentage"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Percentage" Binding="{Binding percentage}"/>
                         </DataGrid.Columns>
+                        
                     </DataGrid>
                 </StackPanel>
 

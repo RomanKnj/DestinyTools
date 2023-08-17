@@ -12,11 +12,15 @@ namespace DestinyTools.ViewModel
     {
         public ObservableCollection<Weapon> weapons { get; set; } = new ObservableCollection<Weapon>();
         public ObservableCollection<Modifier> modifiers { get; set; } = new ObservableCollection<Modifier>();
+        public ObservableCollection<Buff> buffs { get; set; } = new ObservableCollection<Buff>();
+        public ObservableCollection<Debuff> debuffs { get; set; } = new ObservableCollection<Debuff>();
         public ObservableCollection<Class> classes { get; set; } = new ObservableCollection<Class>();
 
         public MainViewModel()
         {
             fillClasses();
+            //fillModifiers();
+            fillBuffs();
         }
 
         private void fillClasses()
@@ -25,6 +29,26 @@ namespace DestinyTools.ViewModel
             Class c1 = new Class { Name = "Warlock", subclasses = sc1 };
 
             classes.Add(c1);
+        }
+
+        private void fillModifiers()
+        {
+            //ObservableCollection<Modifier> m = new ObservableCollection<Modifier>() { new Modifier { Name = "Well", percentage = 25 } };
+
+        }
+        
+        private void fillBuffs()
+        {
+            Buff b = new Buff { Name = "Well", percentage = 25, Stackable = true };
+
+            buffs.Add(b);
+        }
+
+        private void fillDebuffs()
+        {
+            Debuff b = new Debuff { Name = "Well", percentage = 25, Stackable = true };
+
+            debuffs.Add(b);
         }
 
 
