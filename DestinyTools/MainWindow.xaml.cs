@@ -20,6 +20,7 @@ namespace DestinyTools
 
 
             comBoxSubclasses.ItemsSource = ((Class)((ComboBox)sender).SelectedItem).subclasses;
+            comBoxSubclasses.IsEnabled = true;
         }
     }
 }

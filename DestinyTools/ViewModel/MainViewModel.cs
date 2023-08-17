@@ -21,14 +21,19 @@ namespace DestinyTools.ViewModel
             fillClasses();
             //fillModifiers();
             fillBuffs();
+            fillDebuffs();
         }
 
         private void fillClasses()
         {
             ObservableCollection<Subclass> sc1 = new ObservableCollection<Subclass>() { new Subclass { Name = "Solar" }, new Subclass { Name = "Void" }, new Subclass { Name = "Arc" } };
             Class c1 = new Class { Name = "Warlock", subclasses = sc1 };
+            Class c2 = new Class { Name = "Titan", subclasses = sc1 };
+            Class c3 = new Class { Name = "Hunter", subclasses = sc1 };
 
             classes.Add(c1);
+            classes.Add(c2);
+            classes.Add(c3);
         }
 
         private void fillModifiers()
