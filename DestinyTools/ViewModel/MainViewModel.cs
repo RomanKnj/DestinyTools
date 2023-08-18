@@ -153,7 +153,8 @@ namespace DestinyTools.ViewModel
             {
                 if(selectedGuardian != null)
                 {
-                    
+                    selectedGuardian.Class = selectedClass;
+                    selectedGuardian.Class.subclass = selectedSubclass;
                 }
                 else
                 {
