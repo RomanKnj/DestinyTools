@@ -11,5 +11,12 @@ namespace DestinyTools
         {
             InitializeComponent();
         }
+
+        private void ComboBoxClasses_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+
+            comBoxSubclasses.ItemsSource = ((Class)((ComboBox)sender).SelectedItem).subclasses;
+        }
     }
 }
