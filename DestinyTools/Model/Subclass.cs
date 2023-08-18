@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DestinyTools.Model
+﻿namespace DestinyTools.Model
 {
     internal class Subclass
     {

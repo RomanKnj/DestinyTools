@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DestinyTools"
         xmlns:localvm="clr-namespace:DestinyTools.ViewModel"
-        mc:Ignorable="d"
-        Title="Destiny Tools [EID NETTEMIL]" Height="450" Width="800">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="Destiny Tools [EID NETTEMIL]" Height="550" Width="800">
 
     <Window.DataContext>
         <localvm:MainViewModel/>
@@ -20,7 +20,7 @@
             <Setter Property="Height" Value="25"/>
         </Style>
     </Window.Resources>
-    
+
 
     <TabControl>
         <TabItem Header="Fireteam Planner">
@@ -31,59 +31,63 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
-                <StackPanel Grid.Column="0">
-                    <TextBlock Text="Buffs"/>
-                    <Border BorderThickness="1" BorderBrush="Black"/>
 
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding buffs}">
+                <TextBlock Text="Buffs" VerticalAlignment="Bottom"/>
+
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding buffs}" Grid.Row="1">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Percentage" Binding="{Binding percentage}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <TextBlock Text="Debuffs" Grid.Column="1" VerticalAlignment="Bottom"/>
+
+                <StackPanel Grid.Column="1" Grid.Row="1">
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding debuffs}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Percentage" Binding="{Binding percentage}"/>
                         </DataGrid.Columns>
-                        
                     </DataGrid>
                 </StackPanel>
+                
+                <TextBlock Text="Mods" Grid.Row="2" VerticalAlignment="Bottom"/>
+                
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding mods}" Grid.Row="3" Grid.ColumnSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-
-                <StackPanel Grid.Column="1">
-                    <TextBlock Text="Debuffs"/>
-
-                    <Border BorderThickness="1" BorderBrush="Black"/>
-
-                    <DataGrid AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Test"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-
-                <StackPanel Grid.Column="2">
-                    <TextBlock Text="Classes"/>
-                    <Border BorderThickness="1" BorderBrush="Black"/>
-
-                    <Grid Grid.Column="2">
+                <TextBlock Text="Classes" Grid.Column="2" VerticalAlignment="Bottom"/>
+                <StackPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="3">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel>
+                        <StackPanel Margin="10,0">
 
-                            <TextBlock Text="Class" Width="100" Style="{StaticResource textBlockStyle}"/>
-                            
+                            <TextBlock Text="Class" Style="{StaticResource textBlockStyle}"/>
                             <Separator Height="5" Visibility="Hidden"/>
+                            <TextBlock Text="Subclass" Style="{StaticResource textBlockStyle}"/>
+                            <Separator Height="5" Visibility="Hidden"/>
+                            <TextBlock Text="Weapons" Style="{StaticResource textBlockStyle}"/>
 
-                            <TextBlock Text="Subclass" Width="100" Style="{StaticResource textBlockStyle}"/>
-                            
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
 
-                            <ComboBox ItemsSource="{Binding classes}" SelectionChanged="ComboBoxClasses_SelectionChanged" Style="{StaticResource ComBoxStyle}">
+                            <ComboBox ItemsSource="{Binding classes}" SelectedItem="{Binding selectedClass}" Style="{StaticResource ComBoxStyle}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Name}"/>
@@ -92,8 +96,37 @@
                             </ComboBox>
 
                             <Separator Height="5" Visibility="Hidden"/>
-                            
-                            <ComboBox x:Name="comBoxSubclasses" Style="{StaticResource ComBoxStyle}">
+
+                            <ComboBox x:Name="comBoxSubclasses" ItemsSource="{Binding subclasses}" SelectedItem="{Binding selectedSubclass}" Style="{StaticResource ComBoxStyle}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <Separator Height="5" Visibility="Hidden"/>
+
+                            <ComboBox x:Name="comBoxPrimaryWeapon" ItemsSource="{Binding primaryWeapons}" SelectedItem="{Binding selectedPrimaryWeapon}" Style="{StaticResource ComBoxStyle}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <Separator Height="5" Visibility="Hidden"/>
+
+                            <ComboBox x:Name="comBoxSecondaryWeapon" ItemsSource="{Binding secondaryWeapons}" SelectedItem="{Binding selectedSecondaryWeapon}" Style="{StaticResource ComBoxStyle}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Separator Height="5" Visibility="Hidden"/>
+
+                            <ComboBox x:Name="comBoxHeavyWeapon" ItemsSource="{Binding heavyWeapons}" SelectedItem="{Binding selectedHeavyWeapon}" Style="{StaticResource ComBoxStyle}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Name}"/>
@@ -102,15 +135,37 @@
                             </ComboBox>
                         </StackPanel>
                     </Grid>
-                </StackPanel>
-                
-                <ListView Grid.Row="1" Grid.ColumnSpan="3">
                     
+                    
+                    
+                    
+                    <Separator Visibility="Hidden" Height="10"/>
+                    <Button Content="Guardian speichern" Command="{Binding SaveGuardianCommand}" Margin="20,0"/>
+                </StackPanel>
+
+                <ListView Grid.Row="4" Grid.ColumnSpan="3" ItemsSource="{Binding guardians}" SelectedItem="{Binding selectedGuardian}" Margin="0,6,0,0" Grid.RowSpan="2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
-                
+
             </Grid>
         </TabItem>
+
+        <TabItem Header="Add Weapon">
+
+        </TabItem>
+        <TabItem Header="Add Mod">
+
+        </TabItem>
+        <TabItem Header="Add Subclass">
+
+        </TabItem>
     </TabControl>
-    
-    
+
+
 </Window>
